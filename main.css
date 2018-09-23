@@ -57,3 +57,24 @@ body {
   fill: none;
   stroke-width: 3px;
 }
+
+.pie text {
+  font-family: "Verdana";
+  fill: #888;
+}
+
+.pie .name-text{
+  font-size: 1em;
+}
+
+.pie .value-text{
+  font-size: 2em;
+}
+
+.pie .label {
+  font-size: 1.2em;
+}
+
+.pie .value {
+  font-size: 1.6em;
+}

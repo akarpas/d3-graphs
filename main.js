@@ -82,13 +82,21 @@ renderGraph = (data, colors, div, type) => {
 
   const arc = d3.arc()
     .innerRadius(radius - thickness)
-    .outerRadius(radius);
+    .outerRadius(radius)
+    .startAngle( function(d) {
+      return -d.startAngle
+    })
+    .endAngle( function(d) {
+      return -d.endAngle
+    })
 
   const pie = d3.pie()
     .value(function(d) {
-      return d.value;
+      return d.value
     })
-    .sort(null);
+    .sort(function(d) {
+      return d.value
+    })
 
   g.selectAll('svg')
     .data(pie(currentData))
@@ -149,7 +157,17 @@ renderGraph = (data, colors, div, type) => {
     .style('stroke', 'rgba(0,0,0,0.3)')
     .style('stroke-width', '2')
     .attr('transform', 'translate(' + (width-160) + ',' + (height-130) + ')')
+}
 
+renderStats = (data, colors, index) => {
+  const currentData = data.current
+  const total = currentData[0].value + currentData[1].value
+  const tabletPercent = Math.floor((currentData[0].value / total) * 100)
+  const smartphonePercent = 100 - tabletPercent
+  document.getElementById(`tabletTitleChart${index+1}`).style.color = colors[0]
+  document.getElementById(`smartphoneTitleChart${index+1}`).style.color = colors[1]
+  document.getElementById(`tabletValuesChart${index+1}`).innerHTML = `<b>${tabletPercent}%</b> ${addCommas(currentData[0].value)}`
+  document.getElementById(`smartphoneValuesChart${index+1}`).innerHTML = `<b>${smartphonePercent}%</b> ${addCommas(currentData[1].value)}`
 }
 
 start = (allData) => {
@@ -158,6 +176,7 @@ start = (allData) => {
     const data = allData[type]
     const chartDiv = `chart${index+1}`
     renderGraph(data, colors, chartDiv, type, index)
+    renderStats(data, colors, index)
   })
 }
 
