@@ -1,7 +1,7 @@
 const graphs = [
   {
     "type": "revenue",
-    "colors": ['#3A6717','#8AD346']
+    "colors": ['#8AD346','#3A6717']
   },
   {
     "type": "impressions",
@@ -95,7 +95,7 @@ renderGraph = (data, colors, div, type) => {
       return d.value
     })
     .sort(function(d) {
-      return d.value
+      return d.name
     })
 
   g.selectAll('svg')
