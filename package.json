@@ -5,11 +5,17 @@
   "main": "main.js",
   "scripts": {
     "start": "http-server . -o",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "Andreas Karpasitis",
   "license": "ISC",
   "devDependencies": {
-    "http-server": "^0.11.1"
+    "http-server": "^0.11.1",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "chai": "^4.1.2",
+    "fs": "0.0.1-security",
+    "jsdom": "^12.0.0"
   }
 }
