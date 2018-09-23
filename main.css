@@ -1,0 +1,54 @@
+body {
+  min-height: 100%;
+  min-width: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+.container {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.chartContainer {
+  width: auto;
+  height: auto;
+  margin: 1vh 1vw;
+  text-align: center;
+}
+
+.chart {
+  height: 50%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.stats {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  padding-bottom: 10px;
+}
+
+.tablet .title {
+  width: 100%;
+  font-weight: 600;
+  text-align: left;
+}
+
+.smartphone .title {
+  width: 100%;
+  font-weight: 600;
+  text-align: right;
+}
