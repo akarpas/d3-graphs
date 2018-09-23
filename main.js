@@ -15,7 +15,7 @@ const graphs = [
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log( "ready!" )
-  loadJSON(function(res) {
+  loadJSON(res => {
     const allData = JSON.parse(res)
     start(allData)
   })
@@ -174,7 +174,7 @@ addCommas = (total, type) => {
   return type === 'revenue' ? `${totalWithCommas}€` : totalWithCommas
 }
 
-function loadJSON(callback) {
+loadJSON = callback => {
   const req = new XMLHttpRequest()
 
   req.overrideMimeType("application/json")
