@@ -14,7 +14,6 @@ const graphs = [
 ]
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log( "ready!" )
   loadJSON(res => {
     const allData = JSON.parse(res)
     start(allData)
