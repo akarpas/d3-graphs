@@ -123,35 +123,35 @@ renderGraph = (data, colors, div, type) => {
     
   g.append('line')
     .attr('x1', '0')
-    .attr('y1', '-95')
+    .attr('y1', '-99')
     .attr('x2', '0')
-    .attr('y2', '-100')
+    .attr('y2', '-102')
     .style('stroke', 'rgba(0,0,0,0.3)')
     .style('stroke-width', '2')
     .attr('transform', 'translate(' + (width-160) + ',' + (height-130) + ')')
   
   g.append('line')
     .attr('x1', '0')
-    .attr('y1', '95')
+    .attr('y1', '99')
     .attr('x2', '0')
-    .attr('y2', '100')
+    .attr('y2', '102')
     .style('stroke', 'rgba(0,0,0,0.3)')
     .style('stroke-width', '2')
     .attr('transform', 'translate(' + (width-160) + ',' + (height-130) + ')')
   
   g.append('line')
-    .attr('x1', '95')
+    .attr('x1', '99')
     .attr('y1', '0')
-    .attr('x2', '100')
+    .attr('x2', '102')
     .attr('y2', '0')
     .style('stroke', 'rgba(0,0,0,0.3)')
     .style('stroke-width', '2')
     .attr('transform', 'translate(' + (width-160) + ',' + (height-130) + ')')
   
   g.append('line')
-    .attr('x1', '-95')
+    .attr('x1', '-99')
     .attr('y1', '0')
-    .attr('x2', '-100')
+    .attr('x2', '-102')
     .attr('y2', '0')
     .style('stroke', 'rgba(0,0,0,0.3)')
     .style('stroke-width', '2')
@@ -165,8 +165,12 @@ renderStats = (data, colors, index) => {
   const smartphonePercent = 100 - tabletPercent
   document.getElementById(`tabletTitleChart${index+1}`).style.color = colors[0]
   document.getElementById(`smartphoneTitleChart${index+1}`).style.color = colors[1]
-  document.getElementById(`tabletValuesChart${index+1}`).innerHTML = `<b>${tabletPercent}%</b> ${addCommas(currentData[0].value)}`
-  document.getElementById(`smartphoneValuesChart${index+1}`).innerHTML = `<b>${smartphonePercent}%</b> ${addCommas(currentData[1].value)}`
+  document.getElementById(`tabletValuesChart${index+1}`).innerHTML = `
+    <b>${tabletPercent}%</b> <span class="number">${addCommas(currentData[0].value)}</span>
+  `
+  document.getElementById(`smartphoneValuesChart${index+1}`).innerHTML = `
+    <b>${smartphonePercent}%</b> <span class="number">${addCommas(currentData[1].value)}</span>
+  `
 }
 
 start = (allData) => {
