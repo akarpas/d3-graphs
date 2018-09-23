@@ -77,7 +77,7 @@ renderGraph = (data, colors, div, type) => {
     .attr(
       'd',
       `M0,0 300,0 300,400 0,400
-      M 135, 130 m -75, 0 a 75,75 0 1,0 160,0 a 75,75 0 1,0 -160,0`)
+      M 120, 130 m -75, 0 a 75,75 0 1,0 190,0 a 75,75 0 1,0 -190,0`)
     .attr('fill', 'white')
 
   const arc = d3.arc()

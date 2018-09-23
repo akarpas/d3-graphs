@@ -42,12 +42,14 @@ body {
 }
 
 .tablet .title {
+  padding-bottom: 5px;
   width: 100%;
   font-weight: 600;
   text-align: left;
 }
 
 .smartphone .title {
+  padding-bottom: 5px;
   width: 100%;
   font-weight: 600;
   text-align: right;
@@ -58,23 +60,14 @@ body {
   stroke-width: 3px;
 }
 
-.pie text {
-  font-family: "Verdana";
-  fill: #888;
-}
-
-.pie .name-text{
-  font-size: 1em;
-}
-
-.pie .value-text{
-  font-size: 2em;
-}
-
-.pie .label {
+.label {
+  fill: grey;
+  font-weight: 500;
   font-size: 1.2em;
 }
 
-.pie .value {
+.value {
+  font-weight: 500;
+  fill: black;
   font-size: 1.6em;
 }
