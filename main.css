@@ -63,11 +63,23 @@ body {
 .label {
   fill: grey;
   font-weight: 500;
-  font-size: 1.2em;
+  font-size: 1.4em;
 }
 
 .value {
   font-weight: 500;
   fill: black;
-  font-size: 1.6em;
+  font-size: 1.9em;
+}
+
+.tablet .values {
+  text-align: left
+}
+
+.smartphone .values {
+  text-align: right
+}
+
+.number {
+  color: rgba(0,0,0,0.7);
 }

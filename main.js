@@ -1,18 +1,3 @@
-const graphs = [
-  {
-    "type": "revenue",
-    "colors": ['#8AD346','#3A6717']
-  },
-  {
-    "type": "impressions",
-    "colors": ['#73C9E5','#325168']
-  },
-  {
-    "type": "visits",
-    "colors": ['#EFC42A','#BC5620']
-  }
-]
-
 document.addEventListener('DOMContentLoaded', () => {
   loadJSON(res => {
     const allData = JSON.parse(res)
@@ -51,8 +36,8 @@ renderGraph = (data, colors, div, type) => {
 
   const line = d3.line()
     .curve(d3.curveMonotoneX)
-    .x(function(d) { return x(d.date) })
-    .y(function(d) { return y(d.value) })
+    .x(d => x(d.date))
+    .y(d => y(d.value))
 
   g.append('path')
     .datum(totalData)
@@ -62,9 +47,9 @@ renderGraph = (data, colors, div, type) => {
     .attr('opacity','0.2')
 
   const area = d3.area()
-    .x(function(d) { return x(d.date) })
+    .x(d => x(d.date))
     .y0(height)
-    .y1(function(d) { return y(d.value) })
+    .y1(d => y(d.value))
 
   g.append('path')
     .datum(totalData)
@@ -73,29 +58,18 @@ renderGraph = (data, colors, div, type) => {
     .attr('opacity','0.1')
   
   g.append('path')
-    .attr(
-      'd',
-      `M0,0 300,0 300,400 0,400
-      M 120, 130 m -75, 0 a 75,75 0 1,0 190,0 a 75,75 0 1,0 -190,0`)
+    .attr('d',`M0,0 300,0 300,400 0,400 M 120, 130 m -75, 0 a 75,75 0 1,0 190,0 a 75,75 0 1,0 -190,0`)
     .attr('fill', 'white')
 
   const arc = d3.arc()
     .innerRadius(radius - thickness)
     .outerRadius(radius)
-    .startAngle( function(d) {
-      return -d.startAngle
-    })
-    .endAngle( function(d) {
-      return -d.endAngle
-    })
+    .startAngle(d => -d.startAngle)
+    .endAngle(d => -d.endAngle )
 
   const pie = d3.pie()
-    .value(function(d) {
-      return d.value
-    })
-    .sort(function(d) {
-      return d.name
-    })
+    .value(d => d.value)
+    .sort(d =>  d.name)
 
   g.selectAll('svg')
     .data(pie(currentData))
@@ -121,38 +95,22 @@ renderGraph = (data, colors, div, type) => {
     .text(total)
     .attr('transform', 'translate(' + (width-160) + ',' + (height-130) + ')')
     
-  g.append('line')
-    .attr('x1', '0')
-    .attr('y1', '-95')
-    .attr('x2', '0')
-    .attr('y2', '-100')
+  g.append('line').attr('x1', '0').attr('y1', '-99').attr('x2', '0').attr('y2', '-102')
     .style('stroke', 'rgba(0,0,0,0.3)')
     .style('stroke-width', '2')
     .attr('transform', 'translate(' + (width-160) + ',' + (height-130) + ')')
   
-  g.append('line')
-    .attr('x1', '0')
-    .attr('y1', '95')
-    .attr('x2', '0')
-    .attr('y2', '100')
+  g.append('line').attr('x1', '0').attr('y1', '99').attr('x2', '0').attr('y2', '102')
     .style('stroke', 'rgba(0,0,0,0.3)')
     .style('stroke-width', '2')
     .attr('transform', 'translate(' + (width-160) + ',' + (height-130) + ')')
   
-  g.append('line')
-    .attr('x1', '95')
-    .attr('y1', '0')
-    .attr('x2', '100')
-    .attr('y2', '0')
+  g.append('line').attr('x1', '99').attr('y1', '0').attr('x2', '102').attr('y2', '0')
     .style('stroke', 'rgba(0,0,0,0.3)')
     .style('stroke-width', '2')
     .attr('transform', 'translate(' + (width-160) + ',' + (height-130) + ')')
   
-  g.append('line')
-    .attr('x1', '-95')
-    .attr('y1', '0')
-    .attr('x2', '-100')
-    .attr('y2', '0')
+  g.append('line').attr('x1', '-99').attr('y1', '0').attr('x2', '-102').attr('y2', '0')
     .style('stroke', 'rgba(0,0,0,0.3)')
     .style('stroke-width', '2')
     .attr('transform', 'translate(' + (width-160) + ',' + (height-130) + ')')
@@ -165,11 +123,21 @@ renderStats = (data, colors, index) => {
   const smartphonePercent = 100 - tabletPercent
   document.getElementById(`tabletTitleChart${index+1}`).style.color = colors[0]
   document.getElementById(`smartphoneTitleChart${index+1}`).style.color = colors[1]
-  document.getElementById(`tabletValuesChart${index+1}`).innerHTML = `<b>${tabletPercent}%</b> ${addCommas(currentData[0].value)}`
-  document.getElementById(`smartphoneValuesChart${index+1}`).innerHTML = `<b>${smartphonePercent}%</b> ${addCommas(currentData[1].value)}`
+  document.getElementById(`tabletValuesChart${index+1}`).innerHTML = `
+    <b>${tabletPercent}%</b> <span class="number">${addCommas(currentData[0].value)}</span>
+  `
+  document.getElementById(`smartphoneValuesChart${index+1}`).innerHTML = `
+    <b>${smartphonePercent}%</b> <span class="number">${addCommas(currentData[1].value)}</span>
+  `
 }
 
 start = (allData) => {
+  const graphs = [
+    { "type": "revenue", "colors": ['#8AD346','#3A6717'] },
+    { "type": "impressions", "colors": ['#73C9E5','#325168'] },
+    { "type": "visits", "colors": ['#EFC42A','#BC5620'] }
+  ]
+  
   graphs.forEach((graph, index) => {
     const { type, colors } = graph
     const data = allData[type]
