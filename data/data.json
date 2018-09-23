@@ -3,11 +3,11 @@
     "current": [
       {
         "name": "tablet",
-        "value": 80000
+        "value": 120000
       },
       {
         "name": "smartphone",
-        "value": 120000
+        "value": 80000
       }
     ],
     "historical": [
